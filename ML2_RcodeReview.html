@@ -278,7 +278,7 @@ div.tocify {
 </div>
 <div id="implementation" class="section level2">
 <h2>Implementation</h2>
-<p>Functions avalaible in an <a href="https://github.com/FredHasselman/ManyLabRs/tree/master/manylabRs"><code>R</code> package on GitHub</a> (<a href="https://github.com/FredHasselman/ManyLabRs/blob/master/ManyLabRs.pdf">PDF manual</a>) extract information and instructions about each promised analysis a table that is openly accessible, the <a href="https://docs.google.com/spreadsheets/d/1fqK3WHwFPMIjNVVvmxpMEjzUETftq_DmP5LzEhXxUHA/edit#gid=769239110">masteRkey spreadsheet</a>.</p>
+<p>Functions avalaible in an <a href="https://github.com/ManyLabsOpenScience/manylabRs"><code>R</code> package on GitHub</a> (<a href="https://github.com/ManyLabsOpenScience/manylabRs/manyLabRs.pdf">PDF manual</a>) extract information and instructions about each promised analysis a table that is openly accessible, the <a href="https://docs.google.com/spreadsheets/d/1fqK3WHwFPMIjNVVvmxpMEjzUETftq_DmP5LzEhXxUHA/edit#gid=769239110">masteRkey spreadsheet</a>.</p>
 <p>Each row in the table represents an analysis, the columns contain specific information about the analysis:</p>
 <ul>
 <li><p>Columns A through E are identifiers for study, analysis and slate.</p></li>
@@ -297,12 +297,12 @@ div.tocify {
 <div id="does-the-r-code-in-column-o-stat.test-reflect-the-promised-analyses-in-the-protocol" class="section level2">
 <h2><strong>1. Does the <code>R</code> code in column O (<code>stat.test</code>) reflect the promised analyses in the protocol?</strong></h2>
 <ul>
-<li><p>In order to evaluate this you’ll need to look at the analysis plan for a specific study listed in the <a href="http://fredhasselman.com/htmlHost/ManyLabs/ML2_PoPS_proposal.html">protocol</a> and figure out whether the <code>R</code> code in rows of column O for that study represent all the tests that are described in the <em>analysis plan</em> of the proposal.</p></li>
+<li><p>In order to evaluate this you’ll need to look at the analysis plan for a specific study listed in the <a href="https://ManyLabsOpenScience.github.io/ML2_data_cleaning.html">protocol</a> and figure out whether the <code>R</code> code in rows of column O for that study represent all the tests that are described in the <em>analysis plan</em> of the proposal.</p></li>
 <li><p>In many cases this will be straightforward, without any need to actually run code, by looking at the way in which the variables are grouped and labelled, the way filters are applied and the settings used for the analysis, e.g. direction of the test (column P in the spreadsheet, <code>stat.params</code>).</p></li>
-<li><p>In some cases you will need to inspect the contents of the <code>varfun</code> listed in column M. The code is available as an <a href="http://fredhasselman.com/htmlHost/ManyLabs/ML2_varfuns.html">HTML page</a> and of course in a sourceable file on Github <a href="https://github.com/FredHasselman/ManyLabRs/tree/master/manylabRs">ML2_variable_functions.R</a> (to source it in <code>R</code>, run the code below).</p></li>
+<li><p>In some cases you will need to inspect the contents of the <code>varfun</code> listed in column M. The code is available as an <a href="https://ManyLabsOpenScience.github.io/ML2_varfuns.html">HTML page</a> and of course in a sourceable file on Github <a href="https://github.com/ManyLabsOpenScience/manylabRs/R/">ML2_variable_functions.R</a> (to source it in <code>R</code>, run the code below).</p></li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(devtools)
-<span class="kw">source_url</span>(<span class="st">&quot;https://raw.githubusercontent.com/FredHasselman/ManyLabRs/master/manylabRs/R/ML2_variable_functions.R&quot;</span>)</code></pre></div>
+<span class="kw">source_url</span>(<span class="st">&quot;https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/master/R/ML2_variable_functions.R&quot;</span>)</code></pre></div>
 </div>
 <div id="does-the-output-correspond-to-what-may-be-expected-by-the-r-code-in-column-o" class="section level2">
 <h2><strong>2. Does the output correspond to what may be expected by the <code>R</code> code in column O?</strong></h2>
@@ -337,13 +337,13 @@ div.tocify {
 <p>Several ways to install the package.</p>
 <div id="source-from-github" class="section level3">
 <h3>Source from GitHub</h3>
-<p>Use the code below to install the <code>manylabRs</code> package directly from <a href="https://github.com/FredHasselman/ManyLabRs/tree/master/manylabRs">GitHub</a>.</p>
+<p>Use the code below to install the <code>manylabRs</code> package directly from <a href="https://github.com/ManyLabsOpenScience/manylabRs">GitHub</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">&quot;FredHasselman/ManyLabRs/manylabRs&quot;</span>)</code></pre></div>
+<span class="kw">install_github</span>(<span class="st">&quot;ManyLabsOpenScience/manylabRs&quot;</span>)</code></pre></div>
 </div>
 <div id="download-tarball-from-github" class="section level3">
 <h3>Download tarball from GitHub</h3>
-<p>First <a href="https://github.com/FredHasselman/ManyLabRs/tree/master/pkg">download the tarball</a>, then install the package locally through the RStudio package installer.</p>
+<p>First <a href="https://github.com/ManyLabsOpenScience/manylabRs/pkg/">download the tarball</a>, then install the package locally through the RStudio package installer.</p>
 </div>
 </div>
 <div id="main-function" class="section level2">
@@ -351,7 +351,7 @@ div.tocify {
 <p>The main function to inspect is <code>get.analyses()</code>.</p>
 <ul>
 <li>It will take an analysis number (<code>studies</code>) from the <code>masteRkey</code> sheet and an indication of whether the analysis is <code>global</code>, <code>primary</code>, <code>secondary</code>.</li>
-<li>Have a look at <a href="https://github.com/FredHasselman/ManyLabRs/blob/master/saveConsole.R"><code>saveConsole.R</code></a> and the <code>testScript()</code> function. This will create a log file of the output. <strong>Note:</strong> These scripts assume you are on a Mac and you copied the dropbox folder to your harddrive.</li>
+<li>Have a look at <a href="https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/master/R/saveConsole.R"><code>saveConsole.R</code></a> and the <code>testScript()</code> function. This will create a log file of the output. <strong>Note:</strong> These scripts assume you are on a Mac and you copied the dropbox folder to your harddrive.</li>
 </ul>
 <div id="main-algorithm" class="section level3">
 <h3>Main algorithm</h3>

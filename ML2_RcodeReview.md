@@ -36,7 +36,7 @@ These *promised analyses* have all been implemented in `R` in a transparent way 
 
 ## Implementation
 
-Functions avalaible in an [`R` package on GitHub](https://github.com/FredHasselman/ManyLabRs/tree/master/manylabRs) ([PDF manual](https://github.com/FredHasselman/ManyLabRs/blob/master/ManyLabRs.pdf)) extract information and instructions about each promised analysis a table that is openly accessible, the [masteRkey spreadsheet](https://docs.google.com/spreadsheets/d/1fqK3WHwFPMIjNVVvmxpMEjzUETftq_DmP5LzEhXxUHA/edit#gid=769239110).
+Functions avalaible in an [`R` package on GitHub](https://github.com/ManyLabsOpenScience/manylabRs) ([PDF manual](https://github.com/ManyLabsOpenScience/manylabRs/manyLabRs.pdf)) extract information and instructions about each promised analysis a table that is openly accessible, the [masteRkey spreadsheet](https://docs.google.com/spreadsheets/d/1fqK3WHwFPMIjNVVvmxpMEjzUETftq_DmP5LzEhXxUHA/edit#gid=769239110).
 
 Each row in the table represents an analysis, the columns contain specific information about the analysis:   
 
@@ -60,16 +60,16 @@ We would like to get your expert opinion on the following:
 
 ## **1. Does the `R` code in column O (`stat.test`) reflect the promised analyses in the protocol?**
 
-+ In order to evaluate this you'll need to look at the analysis plan for a specific study listed in the [protocol](http://fredhasselman.com/htmlHost/ManyLabs/ML2_PoPS_proposal.html) and figure out whether the `R` code in rows of column O for that study represent all the tests that are described in the *analysis plan* of the proposal.   
++ In order to evaluate this you'll need to look at the analysis plan for a specific study listed in the [protocol](https://ManyLabsOpenScience.github.io/ML2_data_cleaning.html) and figure out whether the `R` code in rows of column O for that study represent all the tests that are described in the *analysis plan* of the proposal.   
 
 + In many cases this will be straightforward, without any need to actually run code, by looking at the way in which the variables are grouped and labelled, the way filters are applied and the settings used for the analysis, e.g. direction of the test (column P in the spreadsheet, `stat.params`).
 
-+ In some cases you will need to inspect the contents of the `varfun` listed in column M. The code is available as an [HTML page](http://fredhasselman.com/htmlHost/ManyLabs/ML2_varfuns.html) and of course in a sourceable file on Github [ML2_variable_functions.R](https://github.com/FredHasselman/ManyLabRs/tree/master/manylabRs) (to source it in `R`, run the code below).  
++ In some cases you will need to inspect the contents of the `varfun` listed in column M. The code is available as an [HTML page](https://ManyLabsOpenScience.github.io/ML2_varfuns.html) and of course in a sourceable file on Github [ML2_variable_functions.R](https://github.com/ManyLabsOpenScience/manylabRs/R/) (to source it in `R`, run the code below).  
   
 
 ```r
 require(devtools)
-source_url("https://raw.githubusercontent.com/FredHasselman/ManyLabRs/master/manylabRs/R/ML2_variable_functions.R")
+source_url("https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/master/R/ML2_variable_functions.R")
 ```
 
 
@@ -101,23 +101,23 @@ Several ways to install the package.
 
 ### Source from GitHub
 
-Use the code below to install the `manylabRs` package directly from [GitHub](https://github.com/FredHasselman/ManyLabRs/tree/master/manylabRs).
+Use the code below to install the `manylabRs` package directly from [GitHub](https://github.com/ManyLabsOpenScience/manylabRs).
 
 ```r
 library(devtools)
-install_github("FredHasselman/ManyLabRs/manylabRs")
+install_github("ManyLabsOpenScience/manylabRs")
 ```
 
 ### Download tarball from GitHub
 
-First [download the tarball](https://github.com/FredHasselman/ManyLabRs/tree/master/pkg), then install the package locally through the RStudio package installer.
+First [download the tarball](https://github.com/ManyLabsOpenScience/manylabRs/pkg/), then install the package locally through the RStudio package installer.
 
 ## Main function
 
 The main function to inspect is `get.analyses()`.  
 
 + It will take an analysis number (`studies`) from the `masteRkey` sheet and an indication of whether the analysis is `global`, `primary`, `secondary`. 
-+ Have a look at [`saveConsole.R`](https://github.com/FredHasselman/ManyLabRs/blob/master/saveConsole.R) and the `testScript()` function. This will create a log file of the output.
++ Have a look at [`saveConsole.R`](https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/master/R/saveConsole.R) and the `testScript()` function. This will create a log file of the output.
 **Note:** These scripts assume you are on a Mac and you copied the dropbox folder to your harddrive.
 
 ### Main algorithm
