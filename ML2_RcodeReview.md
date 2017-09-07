@@ -86,7 +86,7 @@ source_url("https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/mast
 
 ## **3. EXTRA: Data merging and application of exclusions and filters** 
 
-+ The raw data files for each participating lab were merged, cleaned and prepared for analysis using `R` code available in the [Data Cleaning Report](http://fredhasselman.com/htmlHost/ManyLabs/ML2_data_cleaning.html).
++ The raw data files for each participating lab were merged, cleaned and prepared for analysis using `R` code available in the [Data Cleaning Report](https://ManyLabsOpenScience.github.io/ML2_data_cleaning.html).
 
 + The source files are in the dropbox [on OSF](https://osf.io/fprzu/) in `/Raw Data`, the output of the data cleaning script are in:
     * `RAW.DATA.PRIVATE` - Contains the output of the data merging and filtering rules described in 
