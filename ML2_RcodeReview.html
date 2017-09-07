@@ -256,10 +256,10 @@ div.tocify {
 <p><strong>NOTE:</strong> Code review has completed.</p>
 </blockquote>
 <ul>
-<li><a href="https://ManyLabsOpenScience.github.io/ML2_RcodeReview.html">To Code Review Instructions (this page)</a></li>
-<li><a href="https://ManyLabsOpenScience.github.io/ML2_PoPS_proposal.html">To PoPS Proposal</a></li>
-<li><a href="https://ManyLabsOpenScience.github.io/ML2_data_cleaning.html">To Data Cleaning Report</a></li>
-<li><a href="https://ManyLabsOpenScience.github.io/ML2_varfuns.html">To Analysis-Specific Variable Functions</a></li>
+<li><a href="https://ManyLabsOpenScience.github.io/ML2_RcodeReview">To Code Review Instructions (this page)</a></li>
+<li><a href="https://ManyLabsOpenScience.github.io/ML2_PoPS_proposal">To PoPS Proposal</a></li>
+<li><a href="https://ManyLabsOpenScience.github.io/ML2_data_cleaning">To Data Cleaning Report</a></li>
+<li><a href="https://ManyLabsOpenScience.github.io/ML2_varfuns">To Analysis-Specific Variable Functions</a></li>
 </ul>
 <hr />
 </div>
@@ -297,9 +297,9 @@ div.tocify {
 <div id="does-the-r-code-in-column-o-stat.test-reflect-the-promised-analyses-in-the-protocol" class="section level2">
 <h2><strong>1. Does the <code>R</code> code in column O (<code>stat.test</code>) reflect the promised analyses in the protocol?</strong></h2>
 <ul>
-<li><p>In order to evaluate this you’ll need to look at the analysis plan for a specific study listed in the <a href="https://ManyLabsOpenScience.github.io/ML2_data_cleaning.html">protocol</a> and figure out whether the <code>R</code> code in rows of column O for that study represent all the tests that are described in the <em>analysis plan</em> of the proposal.</p></li>
+<li><p>In order to evaluate this you’ll need to look at the analysis plan for a specific study listed in the <a href="https://ManyLabsOpenScience.github.io/ML2_data_cleaning">protocol</a> and figure out whether the <code>R</code> code in rows of column O for that study represent all the tests that are described in the <em>analysis plan</em> of the proposal.</p></li>
 <li><p>In many cases this will be straightforward, without any need to actually run code, by looking at the way in which the variables are grouped and labelled, the way filters are applied and the settings used for the analysis, e.g. direction of the test (column P in the spreadsheet, <code>stat.params</code>).</p></li>
-<li><p>In some cases you will need to inspect the contents of the <code>varfun</code> listed in column M. The code is available as an <a href="https://ManyLabsOpenScience.github.io/ML2_varfuns.html">HTML page</a> and of course in a sourceable file on Github <a href="https://github.com/ManyLabsOpenScience/manylabRs/R/">ML2_variable_functions.R</a> (to source it in <code>R</code>, run the code below).</p></li>
+<li><p>In some cases you will need to inspect the contents of the <code>varfun</code> listed in column M. The code is available as an <a href="https://ManyLabsOpenScience.github.io/ML2_varfuns">HTML page</a> and of course in a sourceable file on Github <a href="https://github.com/ManyLabsOpenScience/manylabRs/R/">ML2_variable_functions.R</a> (to source it in <code>R</code>, run the code below).</p></li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(devtools)
 <span class="kw">source_url</span>(<span class="st">&quot;https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/master/R/ML2_variable_functions.R&quot;</span>)</code></pre></div>
@@ -321,7 +321,7 @@ div.tocify {
 <div id="extra-data-merging-and-application-of-exclusions-and-filters" class="section level2">
 <h2><strong>3. EXTRA: Data merging and application of exclusions and filters</strong></h2>
 <ul>
-<li><p>The raw data files for each participating lab were merged, cleaned and prepared for analysis using <code>R</code> code available in the <a href="https://ManyLabsOpenScience.github.io/ML2_data_cleaning.html">Data Cleaning Report</a>.</p></li>
+<li><p>The raw data files for each participating lab were merged, cleaned and prepared for analysis using <code>R</code> code available in the <a href="https://ManyLabsOpenScience.github.io/ML2_data_cleaning">Data Cleaning Report</a>.</p></li>
 <li>The source files are in the dropbox <a href="https://osf.io/fprzu/">on OSF</a> in <code>/Raw Data</code>, the output of the data cleaning script are in:
 <ul>
 <li><code>RAW.DATA.PRIVATE</code> - Contains the output of the data merging and filtering rules described in</li>

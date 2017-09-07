@@ -43,10 +43,10 @@ knitr::opts_chunk$set(cache=FALSE,prompt=FALSE,comment=NA,message=FALSE,echo=TRU
 
 > **NOTE:** Code review has completed.
 
-* [To Code Review Instructions (this page)](https://ManyLabsOpenScience.github.io/ML2_RcodeReview.html)
-* [To PoPS Proposal](https://ManyLabsOpenScience.github.io/ML2_PoPS_proposal.html)
-* [To Data Cleaning Report](https://ManyLabsOpenScience.github.io/ML2_data_cleaning.html)
-* [To Analysis-Specific Variable Functions](https://ManyLabsOpenScience.github.io/ML2_varfuns.html)
+* [To Code Review Instructions (this page)](https://ManyLabsOpenScience.github.io/ML2_RcodeReview)
+* [To PoPS Proposal](https://ManyLabsOpenScience.github.io/ML2_PoPS_proposal)
+* [To Data Cleaning Report](https://ManyLabsOpenScience.github.io/ML2_data_cleaning)
+* [To Analysis-Specific Variable Functions](https://ManyLabsOpenScience.github.io/ML2_varfuns)
 
 ------
 
@@ -94,11 +94,11 @@ We would like to get your expert opinion on the following:
 
 ## **1. Does the `R` code in column O (`stat.test`) reflect the promised analyses in the protocol?**
 
-+ In order to evaluate this you'll need to look at the analysis plan for a specific study listed in the [protocol](https://ManyLabsOpenScience.github.io/ML2_data_cleaning.html) and figure out whether the `R` code in rows of column O for that study represent all the tests that are described in the *analysis plan* of the proposal.   
++ In order to evaluate this you'll need to look at the analysis plan for a specific study listed in the [protocol](https://ManyLabsOpenScience.github.io/ML2_data_cleaning) and figure out whether the `R` code in rows of column O for that study represent all the tests that are described in the *analysis plan* of the proposal.   
 
 + In many cases this will be straightforward, without any need to actually run code, by looking at the way in which the variables are grouped and labelled, the way filters are applied and the settings used for the analysis, e.g. direction of the test (column P in the spreadsheet, `stat.params`).
 
-+ In some cases you will need to inspect the contents of the `varfun` listed in column M. The code is available as an [HTML page](https://ManyLabsOpenScience.github.io/ML2_varfuns.html) and of course in a sourceable file on Github [ML2_variable_functions.R](https://github.com/ManyLabsOpenScience/manylabRs/R/) (to source it in `R`, run the code below).  
++ In some cases you will need to inspect the contents of the `varfun` listed in column M. The code is available as an [HTML page](https://ManyLabsOpenScience.github.io/ML2_varfuns) and of course in a sourceable file on Github [ML2_variable_functions.R](https://github.com/ManyLabsOpenScience/manylabRs/R/) (to source it in `R`, run the code below).  
   
 ```{r, eval=FALSE}
 require(devtools)
@@ -119,7 +119,7 @@ source_url('https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/mast
 
 ## **3. EXTRA: Data merging and application of exclusions and filters** 
 
-+ The raw data files for each participating lab were merged, cleaned and prepared for analysis using `R` code available in the [Data Cleaning Report](https://ManyLabsOpenScience.github.io/ML2_data_cleaning.html).
++ The raw data files for each participating lab were merged, cleaned and prepared for analysis using `R` code available in the [Data Cleaning Report](https://ManyLabsOpenScience.github.io/ML2_data_cleaning).
 
 + The source files are in the dropbox [on OSF](https://osf.io/fprzu/) in `/Raw Data`, the output of the data cleaning script are in:
     * `RAW.DATA.PRIVATE` - Contains the output of the data merging and filtering rules described in 
