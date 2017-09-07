@@ -1,6 +1,6 @@
 ---
 title: "ManyLabs 2"
-author: ""
+author: "'[ManyLabs2](https://osf.io/8cd4r) (Corresponding coder: [Fred Hasselman](https://osf.io/ujgs6/))'"
 date: ""
 output: html_document
 ---

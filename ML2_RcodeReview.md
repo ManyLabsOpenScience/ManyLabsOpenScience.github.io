@@ -9,10 +9,10 @@
 
 > **NOTE:** Code review has completed.
 
-* [To Code Review Instructions](http://fredhasselman.com/other/ML2/ML2_RcodeReview.html)
-* [To PoPS Proposal](http://fredhasselman.com/other/ML2/ML2_PoPS_proposal.html)
-* [To Data Cleaning Report (this page)](http://fredhasselman.com/other/ML2/ML2_data_cleaning.html)
-* [To Analysis-Specific Variable Functions](http://fredhasselman.com/other/ML2/ML2_varfuns.html)
+* [To Code Review Instructions (this page)](https://ManyLabsOpenScience.github.io/ML2_RcodeReview.html)
+* [To PoPS Proposal](https://ManyLabsOpenScience.github.io/ML2_PoPS_proposal.html)
+* [To Data Cleaning Report](https://ManyLabsOpenScience.github.io/ML2_data_cleaning.html)
+* [To Analysis-Specific Variable Functions](https://ManyLabsOpenScience.github.io/ML2_varfuns.html)
 
 ------
 

@@ -8,21 +8,21 @@
 
 > **NOTE:** Code review has completed.
 
-* [To Code Review Instructions](http://fredhasselman.com/other/ML2/ML2_RcodeReview.html)
-* [To PoPS Proposal](http://fredhasselman.com/other/ML2/ML2_PoPS_proposal.html)
-* [To Data Cleaning Report (this page)](http://fredhasselman.com/other/ML2/ML2_data_cleaning.html)
-* [To Analysis-Specific Variable Functions](http://fredhasselman.com/other/ML2/ML2_varfuns.html)
+* [To Code Review Instructions](https://ManyLabsOpenScience.github.io/ML2_RcodeReview.html)
+* [To PoPS Proposal](https://ManyLabsOpenScience.github.io/ML2_PoPS_proposal.html)
+* [To Data Cleaning Report (this page)](https://ManyLabsOpenScience.github.io/ML2_data_cleaning.html)
+* [To Analysis-Specific Variable Functions](https://ManyLabsOpenScience.github.io/ML2_varfuns.html)
 
 --------
 
 # Get the source file
 
-[Here is a sourceable `R` file with the functions](https://github.com/FredHasselman/manylabRs/blob/master/R/ML2_variable_functions.R)
+[Here is a sourceable `R` file with the functions](https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/master/R/ML2_variable_functions.R)
 
 Or source it directly:
 
 ```r
 library(devtools)
-source_url(url = 'https://raw.githubusercontent.com/FredHasselman/manylabRs/master/R/ML2_variable_functions.R')
+source_url(url = 'https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/master/R/ML2_variable_functions.R')
 ```
 

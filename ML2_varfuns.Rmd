@@ -49,11 +49,11 @@ knitr::opts_chunk$set(eval=FALSE,cache=FALSE,prompt=FALSE,comment=NA,message=FAL
 
 # Get the source file
 
-[Here is a sourceable `R` file with the functions](https://github.com/FredHasselman/manylabRs/blob/master/R/ML2_variable_functions.R)
+[Here is a sourceable `R` file with the functions](https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/master/R/ML2_variable_functions.R)
 
 Or source it directly:
 ```{r, eval=FALSE}
 library(devtools)
-source_url(url = 'https://raw.githubusercontent.com/FredHasselman/manylabRs/master/R/ML2_variable_functions.R')
+source_url(url = 'https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/master/R/ML2_variable_functions.R')
 ```
 
