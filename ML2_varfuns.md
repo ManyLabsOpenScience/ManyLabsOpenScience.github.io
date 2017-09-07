@@ -10,8 +10,8 @@
 
 * [To Code Review Instructions](https://ManyLabsOpenScience.github.io/ML2_RcodeReview)
 * [To PoPS Proposal](https://ManyLabsOpenScience.github.io/ML2_PoPS_proposal)
-* [To Data Cleaning Report (this page)](https://ManyLabsOpenScience.github.io/ML2_data_cleaning)
-* [To Analysis-Specific Variable Functions](https://ManyLabsOpenScience.github.io/ML2_varfuns)
+* [To Data Cleaning Report](https://ManyLabsOpenScience.github.io/ML2_data_cleaning)
+* [To Analysis-Specific Variable Functions (this page)](https://ManyLabsOpenScience.github.io/ML2_varfuns)
 
 --------
 
