@@ -1,0 +1,19 @@
+---
+title: "ManyLabs 2"
+author: ""
+date: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Links to information about the ManyLabs2 project:**
+
+* [To Code Review Instructions](https://ManyLabsOpenScience.github.io/ML2_RcodeReview.html)
+* [To PoPS Proposal](https://ManyLabsOpenScience.github.io/ML2_PoPS_proposal.html)
+* [To Data Cleaning Report](https://ManyLabsOpenScience.github.io/ML2_data_cleaning.html)
+* [To Analysis-Specific Variable Functions](https://ManyLabsOpenScience.github.io/ML2_varfuns.html)
+
+
