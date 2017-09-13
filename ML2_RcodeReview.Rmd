@@ -64,7 +64,7 @@ The ManyLabs2 data analysis strategy attempts to regard three principles that ma
     
 ## `R` as a parser of online code.    
 
-The [pre-registered Manylabs2 protocol](https://docs.google.com/document/d/1B5sVz3jlKMGnpxik-cfCeR8ngeQ249bzQExaVd5FzZM/edit) describes a number of analyses per replication study that can be categorised as **Primary** (target replications per site), **Secondary** (additional analyses per site, e.g. on subgroups), and **Global** (analyses on the entire dataset). 
+The [pre-registered Manylabs2 protocol](https://osf.io/ejcfw/) describes a number of analyses per replication study that can be categorised as **Primary** (target replications per site), **Secondary** (additional analyses per site, e.g. on subgroups), and **Global** (analyses on the entire dataset). 
 
 These *promised analyses* have all been implemented in `R` in a transparent way and this implementation is now ready for an independent review.    
 
