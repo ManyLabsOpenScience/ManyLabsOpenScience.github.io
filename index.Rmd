@@ -1,19 +1,39 @@
 ---
-title: "ManyLabs 2"
-author: '[ManyLabs2](https://osf.io/8cd4r) (Corresponding coder: [Fred Hasselman](https://osf.io/ujgs6/))'
+title: "Estimating Variability In Reproducibility"
+author: '[Many Labs Team](https://osf.io/8cd4r) (Corresponding coder: [Fred Hasselman](https://osf.io/ujgs6/))'
 date: ""
-output: html_document
+output: 
+  html_document: 
+    theme: spacelab
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+require(knitr)
+require(formatR)
+require(devtools)
+options(width=500)
+knitr::opts_chunk$set(cache=FALSE,prompt=FALSE,comment=NA,message=FALSE,echo=TRUE,warning=FALSE,tidy=FALSE,strip.white=FALSE,size="small")
 ```
 
-## **Information about the [ManyLabs2](https://osf.io/8cd4r) project:**
+# **Github repositories**
+
+* [ManyLabs1](https://github.com/ManyLabsOpenScience/ManyLabs1)
+* [ManyLabs2](https://github.com/ManyLabsOpenScience/ManyLabs2)
+* [ManyLabsOPenScience.github.io](https://github.com/ManyLabsOpenScience/ManyLabsOpenScience.github.io)
+* [manylabRs R package](https://github.com/ManyLabsOpenScience/manylabRs)
+
+
+# **Tutorials contained wihin the manylabRs package**
+
+* [How to use the analysis functions](https://github.com/ManyLabsOpenScience/ml2-analysis-how-to.html)
+
+
+
+# **Information about the [ManyLabs2](https://osf.io/8cd4r) project:**
+
 
 * [To Code Review Instructions](https://ManyLabsOpenScience.github.io/ML2_RcodeReview)
 * [To PoPS Proposal](https://ManyLabsOpenScience.github.io/ML2_PoPS_proposal)
 * [To Data Cleaning Report](https://ManyLabsOpenScience.github.io/ML2_data_cleaning)
 * [To Analysis-Specific Variable Functions](https://ManyLabsOpenScience.github.io/ML2_varfuns)
-
 

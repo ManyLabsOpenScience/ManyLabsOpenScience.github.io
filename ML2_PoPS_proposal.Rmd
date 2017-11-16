@@ -31,7 +31,7 @@ geometry: a4paper
 require(knitr)
 require(formatR)
 require(devtools)
-options(width=200)
+options(width=500)
 knitr::opts_chunk$set(cache=FALSE,prompt=FALSE,comment=NA,message=FALSE,echo=TRUE,warning=FALSE,tidy=FALSE,strip.white=FALSE,size="small")
 ```
 

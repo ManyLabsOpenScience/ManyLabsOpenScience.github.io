@@ -33,7 +33,7 @@ geometry: a4paper
 require(knitr)
 require(formatR)
 require(devtools)
-options(width=300)
+options(width=500)
 knitr::opts_chunk$set(cache=FALSE,prompt=FALSE,comment=NA,message=FALSE,echo=TRUE,warning=FALSE,tidy=FALSE,strip.white=FALSE,size="small")
 ```
 
@@ -65,12 +65,13 @@ computeZavani <- FALSE
 dir.keyTable <- "~/Dropbox/Manylabs2/TestOutput/KEYTABLES"
 
 # Use this code (with the devtools package loaded) to source it directly from GitHub:
-git.dir <- 'https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/master/R/'
-source(paste0(git.dir,'C-3PR_ASCII.R'))
-source(paste0(git.dir,'getData.R'))
-source(paste0(git.dir,'inIT.R'))
-source(paste0(git.dir,'ML2_variable_functions.R'))
-source(paste0(git.dir,'fRedsRutils.R'))
+# git.dir <- 'https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/master/R/'
+# source(paste0(git.dir,'C-3PR_ASCII.R'))
+# source(paste0(git.dir,'getData.R'))
+# source(paste0(git.dir,'inIT.R'))
+# source(paste0(git.dir,'ML2_variable_functions.R'))
+# source(paste0(git.dir,'fRedsRutils.R'))
+require(manylabRs)
 
 # Setup Packages, Tables, Function, etc. --------------------------------------------
 
