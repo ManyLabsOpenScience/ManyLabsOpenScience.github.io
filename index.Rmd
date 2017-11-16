@@ -25,7 +25,7 @@ knitr::opts_chunk$set(cache=FALSE,prompt=FALSE,comment=NA,message=FALSE,echo=TRU
 
 # **Tutorials contained wihin the manylabRs package**
 
-* [How to use the analysis functions](https://github.com/ManyLabsOpenScience/ml2-analysis-how-to.html)
+* [How to use the analysis functions](https://ManyLabsOpenScience.github.io/ml2-analysis-how-to.html)
 
 
 
