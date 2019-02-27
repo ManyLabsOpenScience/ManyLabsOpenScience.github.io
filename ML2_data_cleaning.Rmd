@@ -28,21 +28,42 @@ monofont: Gill Sans Light
 mainfont: Calibri
 sansfont: Gill Sans Light
 geometry: a4paper
+params:
+  osfdataPath:
+    label: "Path to the 'OSFdata' folder"
+    value: !r getwd()
+    input: text
+  useLocalKeyTables:
+    label: "Use local (instead of on-line) lookup tables?"
+    value: TRUE
+  saveData:
+    label: "Save the merged data? (will NOT overwrite existing data in 'OSFdata/!!RawData/')"
+    value: TRUE
+  computeSavani:
+    label: "Re-compute Savani (NOT recommended, this is a slow, case-by-case search process!!)"
+    value: FALSE
 ---
+
 ```{r set-options, echo=FALSE,include=FALSE}
 require(knitr)
 require(formatR)
-require(devtools)
+library(devtools)
+ip <- .packages(all.available=TRUE)
+if(!any(ip%in%"intellidate")){
+  devtools::install_github("ramnathv/intellidate")
+}
+library(intellidate)
+library(plyr)
+library(rio)
+library(tidyverse)
 options(width=500)
 knitr::opts_chunk$set(cache=FALSE,prompt=FALSE,comment=NA,message=FALSE,echo=TRUE,warning=FALSE,tidy=FALSE,strip.white=FALSE,size="small")
 ```
 
 --------
 
-* [To Code Review Instructions](https://ManyLabsOpenScience.github.io/ML2_RcodeReview)
-* [To PoPS Proposal](https://ManyLabsOpenScience.github.io/ML2_PoPS_proposal)
-* [To Data Cleaning Report (this page)](https://ManyLabsOpenScience.github.io/ML2_data_cleaning)
-* [To Analysis-Specific Variable Functions](https://ManyLabsOpenScience.github.io/ML2_varfuns)
+* Latest change 27-02-2019: Fixed an error in the Cricher study
+* [To Github Repository](https://github.com/ManyLabsOpenScience/ManyLabs2)
 
 --------
 
@@ -52,41 +73,60 @@ knitr::opts_chunk$set(cache=FALSE,prompt=FALSE,comment=NA,message=FALSE,echo=TRU
 #  SOURCE FROM GITHUB -------------------------------------------------
 
 # Save the data?
-SAVE <- FALSE
+SAVE <- params$saveData
 
 # de-identify the data
 deIDENTIFY <- TRUE
 
-# Compute Zavani? 
+# Use local files?
+useLocal <- params$useLocalKeyTables
+
+# Compute Savani? 
 # SLOW PROCESS!!!
-computeZavani <- FALSE
+computeSavani <- params$computeSavani
 
 # Keytable directory
-dir.keyTable <- "~/Dropbox/Manylabs2/TestOutput/KEYTABLES"
+dir.keyTable <- file.path(params$osfdataPath,"!!KeyTables")
 
-# Use this code (with the devtools package loaded) to source it directly from GitHub:
-# git.dir <- 'https://raw.githubusercontent.com/ManyLabsOpenScience/manylabRs/master/R/'
-# source(paste0(git.dir,'C-3PR_ASCII.R'))
-# source(paste0(git.dir,'getData.R'))
-# source(paste0(git.dir,'inIT.R'))
-# source(paste0(git.dir,'ML2_variable_functions.R'))
-# source(paste0(git.dir,'fRedsRutils.R'))
-require(manylabRs)
+# Save directory
+dir.saveData <- file.path(params$osfdataPath,"!!RawData")
+
+# manylabRs sourceable function library
+#devtools::source_url("https://raw.githubusercontent.com/ManyLabsOpenScience/ManyLabs2/master/Script%20-%20Sourceable%20function%20library/manylabRs_SOURCE.R")
+source('~/Documents/GitHub/ManyLabs2/Script - Sourceable function library/manylabRs_SOURCE.R')
+# Running init() will install packages that are needed by the functions in `manylabRs_SOURCE.R`.
+# These packages might not be needed for the present analysis.
+init()
 
 # Setup Packages, Tables, Function, etc. --------------------------------------------
 
 # Function in.IT will load and -if necessary- install packages passed in a list (un.IT will do the reverse operation).
-in.IT(c("RCurl", "httr", "xlsx", "foreign", "plyr", "reshape2", "tidyverse","rio","intellidate"))
+#in.IT(c("RCurl", "httr", "plyr", "reshape2", "tidyverse","rio"))
 
+if(useLocal){
+  
+SourceInfoTable <- tbl_df(read.csv(file.path(dir.keyTable,"ML2_SourceInfo - ML2_SourceInfo.csv"),stringsAsFactors=FALSE))
+SourceTable     <- tbl_df(read.csv(file.path(dir.keyTable,"ML2_DataInfoFilters - SourceNames.csv"),stringsAsFactors=FALSE))
+FileNameTable   <- tbl_df(read.csv(file.path(dir.keyTable,"ML2_FileNameFilters - FileNames.csv"),stringsAsFactors=FALSE))
+lookup          <- tbl_df(read.csv(file.path(dir.keyTable,"zavani_unique_values.csv"),header = TRUE,stringsAsFactors=FALSE))
+chartable       <- tbl_df(read.csv(file.path(dir.keyTable,"zhong_text - Sheet2.csv"),header = TRUE,stringsAsFactors=FALSE))
+
+} else {
+  
 # Get table with correct Source Names
 SourceInfoTable <- get.GoogleSheet(url = "https://docs.google.com/spreadsheets/d/1Qn_kVkVGwffBAmhAbpgrTjdxKLP1bb2chHjBMVyGl1s/pub?gid=1435507167&single=true&output=csv")$df
 SourceTable     <- get.GoogleSheet(url = "https://docs.google.com/spreadsheets/d/1MpY5H9QJa6dc52BXRk6SIpCl4CMjC6bXTuit3i1Livs/export?format=csv")$df
 FileNameTable   <- get.GoogleSheet(url = "https://docs.google.com/spreadsheets/d/1OLKcyyoYfPds5s4wRpqzXU3lACFr94Ve-cR2l_zodtU/export?format=csv")$df
+lookup <- get.GoogleSheet(url = 'https://docs.google.com/spreadsheets/d/1aJJcCk8UvefbSAIePhmh6kEolOc5RwwB3cC_hBtrH5c/export?format=csv',skip = 4)$df
+chartable <- get.GoogleSheet(url="https://docs.google.com/spreadsheets/d/1J9I1JVTQqCrC7x5gz3TzA7sUCvjKJGfz0nh8EgfVAVs/pub?gid=2038506223&single=true&output=csv")$df
 
-ExpSurvey <- read.csv("~/Dropbox/Manylabs2/TestOutput/RAW.DATA.PRIVATE/ML2_Experimenter_Survey.data.edited.formerge.csv")
+}
+
+ExpSurvey <- read.csv("~/Documents/GitHub/ManyLabs2/Data/Raw to clean data/Raw Data/ML2_Experimenter_Survey.data.edited.formerge.csv")
 ExpSurvey <- ExpSurvey[-1, ]
 
-# # Code used to generate SourceInfoTable for(s in seq_along(SourceInfoTable$Source)){ ID <-
+# # Code used to generate SourceInfoTable 
+# for(s in seq_along(SourceInfoTable$Source)){ ID <-
 # which(SourceInfoTable$Source[[s]]==ExpSurvey$ex.source) if(length(ID)>0){ exID <-
 # which('execution'==strsplit(SourceInfoTable$Filename[s],split = '[_]')[[1]]) if(length(exID)>0){
 # SourceInfoTable$Execution[s] <- paste(strsplit(SourceInfoTable$Filename[s],split = '[_]')[[1]][exID+1]) } else {
@@ -146,9 +186,10 @@ The function `get.CSVdata(... , finishedOnly = TRUE)` merges each raw data file 
 
 ```{r 1. merge files, warning=FALSE}
 # MERGE RAW DATA ----------------------------------------------------------
-
+ignore.case <- function(pat){tolower(pat)}
+  
 # Set the working directory to where the raw data files are...
-dataDir  <-  '~/Dropbox/Manylabs2/Raw Data'
+dataDir  <-  '~/Documents/GitHub/ManyLabs2/Data/Raw to clean data/Raw Data'
 fileList <- list.files(dataDir,".csv")
 
 # Merge Slate 1 & remove incomplete cases
@@ -928,15 +969,14 @@ ML2.S2$zav.include.primed <- NA
 ML2.S2$zav.condition      <- NA
 
 # Get the table.
-lookup <- get.GoogleSheet(url = 'https://docs.google.com/spreadsheets/d/1aJJcCk8UvefbSAIePhmh6kEolOc5RwwB3cC_hBtrH5c/export?format=csv')$df
- 
+
 # Generate variable names.
 varsCOLD <- paste0("zav1.",1:13)
 varsHOT  <- paste0("zav2.",1:13)
 
 cols <- which(colnames(ML2.S2)%in%c('Country','Language',varsCOLD, varsHOT, paste0('zav.code',1:13),'zav.include.strict','zav.include.primed','zav.condition'))
 
-if(computeZavani){
+if(computeSavani){
 ## THIS IS A SLOW, CASE-BY-CASE LOOKUP PROCESS
 ## THE CODE BELOW WILL GENERATE A FILE `zavInclude.csv`, LOAD IT TO GENERATE THE .RMD QUICKLY
 # Iterate over all cases
@@ -976,7 +1016,7 @@ ML2.S2$nCopied.zhon2 <- nchar(gsub("[[:space:]]|[[:punct:]]","",ML2.S2$zhon2.1))
 Add a variable `nCharText` containing the number of characters in the target text. The target texts for each language are available in a [Google spreadsheet](https://docs.google.com/spreadsheets/d/1J9I1JVTQqCrC7x5gz3TzA7sUCvjKJGfz0nh8EgfVAVs/edit?usp=sharing).   
 
 ```{r}
-(chartable <- get.GoogleSheet(url="https://docs.google.com/spreadsheets/d/1J9I1JVTQqCrC7x5gz3TzA7sUCvjKJGfz0nh8EgfVAVs/pub?gid=2038506223&single=true&output=csv")$df)
+chartable
 
 # Add the number of characters for each language.
 vars <- ldply(seq_along(ML2.S2[,1]), function(l) data.frame(chartable[ML2.S2$Language[l]==chartable$language, c("nCharText.zhon2","nCharText.zhon1")]))
@@ -1012,7 +1052,7 @@ id2 <- which((ML2.S1$Pencil=="Yes, participants completed the Critcher task on p
 
 # Convert to numbers
 c1 <- as.numeric(gsub("[[:punct:]]|[[:space:]]","",ML2.S1$crit1.1_1_TEXT[id1]))
-c2 <- as.numeric(gsub("[[:punct:]]|[[:space:]]","",ML2.S1$crit1.1_1_TEXT[id2]))
+c2 <- as.numeric(gsub("[[:punct:]]|[[:space:]]","",ML2.S1$crit2.1_1_TEXT[id2]))
 
 # Copy
 ML2.S1$crit1.1[id1] <- c1
@@ -1494,12 +1534,10 @@ require(rio)
 ML2.S1 <- get.Order(ML2.S1, S1 = TRUE)$df
 ML2.S2 <- get.Order(ML2.S2, S1 = FALSE)$df
 
-prefix <- ("~/Dropbox/Manylabs2/TestOutput/RAW.DATA.PRIVATE/")
-#prefix <- "~/Documents/Projects/ManyLabs2 Local/TestOutput/RAW.DATA.PRIVATE/"
-
 
 #de-identify
 if(deIDENTIFY){
+  prefix <- ("~/Documents/GitHub/ManyLabs2/Data/Raw to clean data/Raw Data After Cleaning/")
   # 'politics' is required for Graham.1 & Graham.2
   S1 <- c("ResponseSet", "Name", "ExternalDataReference", "EmailAddress", "IPAddress", "Status", "kay1.1", "kay1.2_7_TEXT", "kay1.2_8_TEXT", "kay1.2_9_TEXT", "kay1.3", "kay2.1", "kay2.2_7_TEXT", "kay2.2_8_TEXT", "kay2.2_9_TEXT", "kay2.3", "and1.1", "and2.1", "age", "sex", "race", "race.brazi", "race.hunga", "raceother", "born", "born.par", "born.par2", "borno", "born.paro", "born.par2o", "hometown", "education", "LocationLatitude", "LocationLongitude", "LocationAccuracy", "credit", "RID", "MID", "race.nz_1", "race.nz_2", "race.nz_3", "race.nz_4", "race.nz_5", "race.nz_6", "race.nz_7", "race.nz_9", "race.nz_10", "race.pol", "race.safri", "race.chi10", "race.chil1", "race.cost1", "race.mex", "race.uru", "race.swe", "race.turk1", "race.uae", "comments", "race.ger", "credit_1_TEXT", "credit_2_TEXT")
   
@@ -1509,6 +1547,8 @@ if(deIDENTIFY){
   S2 <- c("ResponseSet", "Name", "ExternalDataReference", "EmailAddress", "IPAddress", "Status", "id", "sava1.2", "sava1.3", "sava1.7", "sava1.8", "sava1.12", "sava1.13", "sava1.18", "sava1.19", "sava1.24", "sava1.25", "sava1.30", "sava1.31", "sava1.36", "sava1.37", "sava1.41", "sava1.42", "sava2.2", "sava2.3", "sava2.7", "sava2.8", "sava2.12", "sava2.13", "sava2.18", "sava2.19", "sava2.24", "sava2.25", "sava2.30", "sava2.31", "sava2.36", "sava2.37", "sava2.41", "sava2.42", "zhon1.1", "zhon2.1", "zav.int.1", "zav1.1", "zav1.2", "zav1.3", "zav1.4", "zav1.5", "zav1.6", "zav1.7", "zav1.8", "zav1.9", "zav1.10", "zav1.11", "zav1.12", "zav1.13", "zav2.1", "zav2.2", "zav2.3", "zav2.4", "zav2.5", "zav2.6", "zav2.7", "zav2.8", "zav2.9", "zav2.10", "zav2.11", "zav2.12", "zav2.13", "age", "race", "raceother", "born", "born.par", "born.par2", "hometown", "education", "LocationLatitude", "LocationLongitude", "LocationAccuracy", "political", "race.uae", "credit", "RID", "MID", "race.nz_1", "race.nz_2", "race.nz_3", "race.nz_4", "race.nz_5", "race.nz_6", "race.nz_7", "race.nz_8", "race.nz_10", "credit_1_TEXT", "credit_2_TEXT", "race.pol", "born.other", "born.par.o", "born.par2o", "credit1", "credit2", "credit3", "hearing", "comments", "race.ger")
   
   ML2.S2 <- select(ML2.S2, -which(colnames(ML2.S2)%in%S2))
+} else {
+  prefix <- ("~/Documents/GitHub/ManyLabs2/Data/Raw to clean data/Raw Data After Cleaning PRIVATE/")
 }
 
 #Raw Data Slate 1 .xlsx, .csv, RDS 

@@ -1,14 +1,55 @@
-# ManyLabs2 Data Cleaning
-[ManyLabs2](https://osf.io/8cd4r) (Corresponding coder: [Fred Hasselman](https://osf.io/ujgs6/))  
-24 October 2015  
+---
+title: "ManyLabs2 Data Cleaning"
+author: '[ManyLabs2](https://osf.io/8cd4r) (Corresponding coder: [Fred Hasselman](https://osf.io/ujgs6/))'
+date: "24 October 2015"
+output:
+  html_document:
+    fig_caption: yes
+    fig_height: 8
+    fig_width: 11
+    highlight: pygments
+    keep_md: yes
+    number_sections: yes
+    theme: spacelab
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+  pdf_document:
+    fig_caption: yes
+    fig_crop: no
+    fig_height: 8
+    fig_width: 11
+    highlight: zenburn
+    keep_tex: yes
+    latex_engine: xelatex
+    toc: yes
+    toc_depth: 4
+monofont: Gill Sans Light
+mainfont: Calibri
+sansfont: Gill Sans Light
+geometry: a4paper
+params:
+  osfdataPath:
+    label: "Path to the 'OSFdata' folder"
+    value: "/Users/fred/Documents/GitHub/ManyLabs2/OSFdata"
+    input: text
+  useLocalKeyTables:
+    label: "Use local (instead of on-line) lookup tables?"
+    value: TRUE
+  saveData:
+    label: "Save the merged data? (will NOT overwrite existing data in 'OSFdata/!!RawData/')"
+    value: TRUE
+  computeSavani:
+    label: "Re-compute Savani (NOT recommended, this is a slow, case-by-case search process!!)"
+    value: FALSE
+---
+
 
 
 --------
 
-* [To Code Review Instructions](https://ManyLabsOpenScience.github.io/ML2_RcodeReview)
-* [To PoPS Proposal](https://ManyLabsOpenScience.github.io/ML2_PoPS_proposal)
-* [To Data Cleaning Report (this page)](https://ManyLabsOpenScience.github.io/ML2_data_cleaning)
-* [To Analysis-Specific Variable Functions](https://ManyLabsOpenScience.github.io/ML2_varfuns)
+* Latest change 27-02-2019: Fixed an error in the Cricher study
+* [To Github Repository](https://github.com/ManyLabsOpenScience/ManyLabs2)
 
 --------
 
@@ -33,9 +74,10 @@ The function `get.CSVdata(... , finishedOnly = TRUE)` merges each raw data file 
 
 ```r
 # MERGE RAW DATA ----------------------------------------------------------
-
+ignore.case <- function(pat){tolower(pat)}
+  
 # Set the working directory to where the raw data files are...
-dataDir  <-  '~/Dropbox/Manylabs2/Raw Data'
+dataDir  <-  '~/Documents/GitHub/ManyLabs2/Data/Raw to clean data/Raw Data'
 fileList <- list.files(dataDir,".csv")
 
 # Merge Slate 1 & remove incomplete cases
@@ -1305,25 +1347,25 @@ Add a variable `nCharText` containing the number of characters in the target tex
 
 
 ```r
-(chartable <- get.GoogleSheet(url="https://docs.google.com/spreadsheets/d/1J9I1JVTQqCrC7x5gz3TzA7sUCvjKJGfz0nh8EgfVAVs/pub?gid=2038506223&single=true&output=csv")$df)
+chartable
 ```
 
 ```
 # A tibble: 12 x 3
-                language nCharText.zhon2 nCharText.zhon1
-                   <chr>           <int>           <int>
- 1               English             547             573
- 2               Turkish             573             592
+   language              nCharText.zhon2 nCharText.zhon1
+   <chr>                           <int>           <int>
+ 1 English                           547             573
+ 2 Turkish                           573             592
  3 Chinese (traditional)             177             186
- 4               Spanish             629             671
- 5  Chinese (simplified)             170             183
- 6               Serbian             581             605
- 7                Polish             541             541
- 8               Italian             682             713
- 9                German             646             665
-10                French             593             635
-11                 Dutch             607             649
-12                 Czech             556             564
+ 4 Spanish                           629             671
+ 5 Chinese (simplified)              170             183
+ 6 Serbian                           581             605
+ 7 Polish                            541             541
+ 8 Italian                           682             713
+ 9 German                            646             665
+10 French                            593             635
+11 Dutch                             607             649
+12 Czech                             556             564
 ```
 
 ```r
@@ -1364,7 +1406,7 @@ id2 <- which((ML2.S1$Pencil=="Yes, participants completed the Critcher task on p
 
 # Convert to numbers
 c1 <- as.numeric(gsub("[[:punct:]]|[[:space:]]","",ML2.S1$crit1.1_1_TEXT[id1]))
-c2 <- as.numeric(gsub("[[:punct:]]|[[:space:]]","",ML2.S1$crit1.1_1_TEXT[id2]))
+c2 <- as.numeric(gsub("[[:punct:]]|[[:space:]]","",ML2.S1$crit2.1_1_TEXT[id2]))
 
 # Copy
 ML2.S1$crit1.1[id1] <- c1
@@ -1889,7 +1931,7 @@ exclusionRule                                   S1.N   S2.N   TOT.N   S1.Nsrc   
 18. van.Lange.1 numbers as text.                7298   8353   15651   74        61        122        0.011      0        
 19. Ross.1 and Ross.2 percentages as text.      7298   8353   15651   74        61        122        0.003      0.005    
 20. Zhong less than half copied to NA.          7298   8353   15651   74        61        122        0          0.366    
-21. Exclude age < 18.                           7263   8042   15305   74        61        122        -0.585     -3.854   
+21. Exclude age < 18.                           7263   8042   15305   74        61        122        -0.587     -3.854   
 22. Exclude French cases from Hsee.             7263   8042   15305   74        61        122        0          0.039    
 23. Change German coding of Gray.               7263   8042   15305   74        61        122        0          0        
 24. Change German coding of Risen.              7263   8042   15305   74        61        122        0          0        

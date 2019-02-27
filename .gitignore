@@ -32,3 +32,4 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 .Rproj.user
+ML2_data_cleaning_files/.DS_Store
